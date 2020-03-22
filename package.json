@@ -17,7 +17,7 @@
       "build": "yarn prebuild & tsc",
       "build:start": "yarn build & yarn start",
       "start": "node index.js",
-      "prebuild": "rimraf dist",
+      "prebuild": "rimraf index.js index.d.ts",
       "demo": "nodemon demo.js",
       "demo:start": "node demo.js"
    },
