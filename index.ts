@@ -1,12 +1,8 @@
+import { isObject } from 'is-all-utils';
+
 interface More {
    [key: string]: any;
 }
-const IsObject = (src: any): boolean => {
-   if (toString.call(src) === '[object Object]') {
-      return true;
-   }
-   return false;
-};
 
 const Merge = (...objs: More[]) => {
    var payload: More = {},
@@ -15,11 +11,11 @@ const Merge = (...objs: More[]) => {
 
    while (objs.length > 0) {
       source = objs.splice(0, 1)[0];
-      if (IsObject(source)) {
+      if (isObject(source)) {
          for (key in source) {
             if (source.hasOwnProperty(key)) {
                const value = source[key];
-               if (IsObject(value)) {
+               if (isObject(value)) {
                   payload[key] = Merge(payload[key] || {}, value);
                } else {
                   payload[key] = value;
@@ -31,5 +27,6 @@ const Merge = (...objs: More[]) => {
 
    return payload;
 };
-export { Merge, IsObject };
+
+export { Merge };
 export default Merge;
