@@ -4,10 +4,10 @@ interface More {
    [key: string]: any;
 }
 
-const Merge = (...objs: More[]) => {
-   var payload: More = {},
+const Merge = <T extends More = More>(...objs: (T | More)[]): T => {
+   let payload: More = {},
       source: More,
-      key: string | Number;
+      key: string | number;
 
    while (objs.length > 0) {
       source = objs.splice(0, 1)[0];
@@ -25,7 +25,7 @@ const Merge = (...objs: More[]) => {
       }
    }
 
-   return payload;
+   return payload as T;
 };
 
 export { Merge };
