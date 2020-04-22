@@ -4,7 +4,9 @@
    "description": "Merge all objects !",
    "main": "index.js",
    "type": "index.d.ts",
-   "dependencies": {},
+   "dependencies": {
+      "is-all-utils": "^1.0.1"
+   },
    "devDependencies": {
       "@types/node": "^13.9.0",
       "nodemon": "^2.0.2",
