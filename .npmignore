@@ -1,0 +1,7 @@
+# Folders Section
+/.vscode
+
+# Files Section
+.prettierrc.js
+index.ts
+tsconfig.json
