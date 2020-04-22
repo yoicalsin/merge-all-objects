@@ -1,21 +1,31 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const IsObject = (src) => {
-    if (toString.call(src) === '[object Object]') {
-        return true;
-    }
-    return false;
-};
-exports.IsObject = IsObject;
+const is_all_utils_1 = require("is-all-utils");
+/**
+ * @author Yoni Calsin <helloyonicb@gmail.com>
+ * @param {object} obj
+ * @example
+ * const obj1 = {
+ *    app: {
+ *       name: "Application"
+ *    }
+ * }
+ * const obj2 = {
+ *    app: {
+ *       port: 8080
+ *    }
+ * }
+ * Merge(obj1, obj2)
+ */
 const Merge = (...objs) => {
-    var payload = {}, source, key;
+    let payload = {}, source, key;
     while (objs.length > 0) {
         source = objs.splice(0, 1)[0];
-        if (IsObject(source)) {
+        if (is_all_utils_1.isObject(source)) {
             for (key in source) {
                 if (source.hasOwnProperty(key)) {
                     const value = source[key];
-                    if (IsObject(value)) {
+                    if (is_all_utils_1.isObject(value)) {
                         payload[key] = Merge(payload[key] || {}, value);
                     }
                     else {
