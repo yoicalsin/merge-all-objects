@@ -5,7 +5,7 @@
    "main": "index.js",
    "type": "index.d.ts",
    "dependencies": {
-      "is-all-utils": "^1.0.1"
+      "is-all-utils": "^1.0.3"
    },
    "devDependencies": {
       "@types/node": "^13.9.0",
