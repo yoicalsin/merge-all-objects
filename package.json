@@ -11,6 +11,7 @@
       "@types/node": "^13.9.0",
       "nodemon": "^2.0.2",
       "prettier": "^1.19.1",
+      "prettier-plugin-packagejson": "^2.2.5",
       "rimraf": "^3.0.2"
    },
    "scripts": {
