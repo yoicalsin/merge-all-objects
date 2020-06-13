@@ -24,7 +24,7 @@ interface More {
  *       two: {}
  *    }
  * }
- * Merge(obj1, obj2, ["circle"])
+ * Merge(obj1, obj2, ["circle", /^\@delete/])
  */
 const Merge = <T extends More = More>(...objs: (T | More)[]): T => {
    let payload: More = {},
