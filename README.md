@@ -80,8 +80,10 @@ Merge(obj1, obj2, ['circle']); // accept unlimited items!
 
 ## 🎩 Stay in touch
 
--  Author [Yoni Calsin](https://github.com/yoicalsin)
--  Twitter [Yoni Calsin](https://twitter.com/yoicalsin)
+-  Github [@yonicalsin](https://github.com/yonicalsin)
+-  Twitter [@yonicalsin](https://twitter.com/yonicalsin)
+-  Instagram [@yoni_calsin](https://instagram.com/yoni_calsin)
+-  Medium [@yonicalsin](https://medium.com/yonicalsin)
 
 ## Contributors
 
