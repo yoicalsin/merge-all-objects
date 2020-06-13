@@ -1,19 +1,19 @@
 {
    "name": "merge-all-objects",
    "version": "1.0.3",
-   "description": "Merge all objects !",
+   "description": "🚀 merge-all-objects is a function that allows you to merge thousands of objects with recursion, and with exclusions as well",
    "keywords": [
       "merge-all-objects",
       "merge",
       "object"
    ],
-   "homepage": "https://github.com/yoicalsin/merge-all-objects#readme",
+   "homepage": "https://github.com/yonicalsin/merge-all-objects#readme",
    "bugs": {
-      "url": "https://github.com/yoicalsin/merge-all-objects/issues"
+      "url": "https://github.com/yonicalsin/merge-all-objects/issues"
    },
    "repository": {
       "type": "git",
-      "url": "git+https://github.com/yoicalsin/merge-all-objects.git"
+      "url": "git+https://github.com/yonicalsin/merge-all-objects.git"
    },
    "license": "MIT",
    "author": "Yoni Calsin <helloyonicb@gmail.com>",
