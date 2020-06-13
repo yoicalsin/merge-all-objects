@@ -20,12 +20,18 @@ const obj1 = {
    app: {
       name: 'Application',
    },
+   circle: {
+      one: {},
+   },
 };
 
 // Second object
 const obj2 = {
    app: {
       port: 8080,
+   },
+   circle: {
+      two: {},
    },
 };
 
@@ -34,7 +40,35 @@ const data = Merge(obj1, obj2); // accept unlimited items!
 {
    app: {
       name: "Application",
-      port: 8080
+      port: 8080,
+      circle: {
+         one: {},
+         two: {}
+      }
+   }
+}
+*/
+```
+
+### Excluded
+
+`merge-all-objects` allows you to exclude some keys from an object, as follows
+
+-  for example we are going to exclude the circle key assuming that circle contains an infinite loop of objects, to avoid a collapse problem, we will avoid it adding an array of strings the keys we want to exclude, **the keys have to be added always as last parameter of the Merge function**
+
+-  the key to be excluded will not be iterated, it will simply be assigned the last key among all the objects entered
+
+```ts
+// To add the keys to be excluded always add them at the end in the
+Merge(obj1, obj2, ['circle']); // accept unlimited items!
+/*
+{
+   app: {
+      name: "Application",
+      port: 8080,
+      circle: {
+         two: {}
+      }
    }
 }
 */
@@ -46,8 +80,10 @@ const data = Merge(obj1, obj2); // accept unlimited items!
 
 ## 🎩 Stay in touch
 
--  Author [Yoni Calsin](https://github.com/yoicalsin)
--  Twitter [Yoni Calsin](https://twitter.com/yoicalsin)
+-  Github [@yonicalsin](https://github.com/yonicalsin)
+-  Twitter [@yonicalsin](https://twitter.com/yonicalsin)
+-  Instagram [@yoni_calsin](https://instagram.com/yoni_calsin)
+-  Medium [@yonicalsin](https://medium.com/yonicalsin)
 
 ## Contributors
 

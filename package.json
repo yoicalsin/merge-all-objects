@@ -1,9 +1,34 @@
 {
    "name": "merge-all-objects",
-   "version": "1.0.0",
+   "version": "1.0.2",
    "description": "Merge all objects !",
-   "main": "index.js",
+   "keywords": [
+      "merge-all-objects",
+      "merge",
+      "object"
+   ],
+   "homepage": "https://github.com/yoicalsin/merge-all-objects#readme",
+   "bugs": {
+      "url": "https://github.com/yoicalsin/merge-all-objects/issues"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/yoicalsin/merge-all-objects.git"
+   },
+   "license": "MIT",
+   "author": "Yoni Calsin <helloyonicb@gmail.com>",
    "type": "index.d.ts",
+   "main": "index.js",
+   "scripts": {
+      "prebuild": "rimraf index.js index.d.ts",
+      "build": "yarn prebuild & tsc",
+      "build:start": "yarn build & yarn start",
+      "demo": "nodemon demo.js",
+      "demo:start": "node demo.js",
+      "dev": "yarn prebuild & tsc -w",
+      "dev:start": "nodemon index.js",
+      "start": "node index.js"
+   },
    "dependencies": {
       "is-all-utils": "^1.0.3"
    },
@@ -11,31 +36,7 @@
       "@types/node": "^13.9.0",
       "nodemon": "^2.0.2",
       "prettier": "^1.19.1",
+      "prettier-plugin-packagejson": "^2.2.5",
       "rimraf": "^3.0.2"
-   },
-   "scripts": {
-      "dev": "yarn prebuild & tsc -w",
-      "dev:start": "nodemon index.js",
-      "build": "yarn prebuild & tsc",
-      "build:start": "yarn build & yarn start",
-      "start": "node index.js",
-      "prebuild": "rimraf index.js index.d.ts",
-      "demo": "nodemon demo.js",
-      "demo:start": "node demo.js"
-   },
-   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/yoicalsin/merge-all-objects.git"
-   },
-   "keywords": [
-      "merge-all-objects",
-      "merge",
-      "object"
-   ],
-   "author": "Yoni Calsin <helloyonicb@gmail.com>",
-   "license": "MIT",
-   "bugs": {
-      "url": "https://github.com/yoicalsin/merge-all-objects/issues"
-   },
-   "homepage": "https://github.com/yoicalsin/merge-all-objects#readme"
+   }
 }

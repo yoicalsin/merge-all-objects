@@ -1,4 +1,4 @@
-import { isObject } from 'is-all-utils';
+import { isObject, isArray } from 'is-all-utils';
 
 interface More {
    [key: string]: any;
@@ -11,19 +11,28 @@ interface More {
  * const obj1 = {
  *    app: {
  *       name: "Application"
+ *    },
+ *    circle: {
+ *       one: {}
  *    }
  * }
  * const obj2 = {
  *    app: {
  *       port: 8080
+ *    },
+ *    circle: {
+ *       two: {}
  *    }
  * }
- * Merge(obj1, obj2)
+ * Merge(obj1, obj2, ["circle"])
  */
 const Merge = <T extends More = More>(...objs: (T | More)[]): T => {
    let payload: More = {},
       source: More,
       key: string | number;
+   let excluded: any = objs[objs.length - 1];
+   // For add the excluded keys
+   excluded = isArray(excluded) ? excluded : [];
 
    while (objs.length > 0) {
       source = objs.splice(0, 1)[0];
@@ -31,8 +40,8 @@ const Merge = <T extends More = More>(...objs: (T | More)[]): T => {
          for (key in source) {
             if (source.hasOwnProperty(key)) {
                const value = source[key];
-               if (isObject(value)) {
-                  payload[key] = Merge(payload[key] || {}, value);
+               if (isObject(value) && !excluded.includes(key)) {
+                  payload[key] = Merge(payload[key] || {}, value, excluded);
                } else {
                   payload[key] = value;
                }
