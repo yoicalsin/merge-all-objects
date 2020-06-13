@@ -5,3 +5,4 @@
 .prettierrc.js
 index.ts
 tsconfig.json
+yarn.lock
