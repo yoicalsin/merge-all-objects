@@ -35,7 +35,13 @@ const Merge = (...objs) => {
             for (key in source) {
                 if (source.hasOwnProperty(key)) {
                     const value = source[key];
-                    if (is_all_utils_1.isObject(value) && !excluded.includes(key)) {
+                    if (is_all_utils_1.isObject(value) &&
+                        !excluded.some(exclude => {
+                            if (is_all_utils_1.isRegExp(exclude) && is_all_utils_1.isString(key)) {
+                                return exclude.test(key);
+                            }
+                            return key === exclude;
+                        })) {
                         payload[key] = Merge(payload[key] || {}, value, excluded);
                     }
                     else {
