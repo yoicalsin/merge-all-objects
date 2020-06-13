@@ -58,22 +58,23 @@ const obj2 = {
 };
 
 const data = Merge(obj1, obj2); // accept unlimited items!
-/*
+```
+
+```json
 {
-   app: {
-      name: "Application",
-      port: 8080,
-      circle: {
-         one: {},
-         two: {}
+   "app": {
+      "name": "Application",
+      "port": 8080,
+      "circle": {
+         "one": {},
+         "two": {}
       },
-      '@delete/bucle': {
-         one: { one: {} },
-         two: { two: {} },
-      },
+      "@delete/bucle": {
+         "one": { "one": {} },
+         "two": { "two": {} }
+      }
    }
 }
-*/
 ```
 
 ### Excluded
@@ -91,21 +92,21 @@ const data = Merge(obj1, obj2); // accept unlimited items!
 ```ts
 // To add the keys to be excluded always add them at the end in the
 Merge(obj1, obj2, ['circle', /^\@delete/]); // accept unlimited items!
-/*
+```
+
+```json
 {
-   app: {
-      name: "Application",
-      port: 8080,
-      circle: {
-         two: {}
+   "app": {
+      "name": "Application",
+      "port": 8080,
+      "circle": {
+         "two": {}
       },
-      // I don't know if you notice it, but this object no longer works because it has been excluded, and only the last analyzed value will be assigned to it
-      '@delete/bucle': {
-         two: { two: {} },
-      },
+      "@delete/bucle": {
+         "two": { "two": {} }
+      }
    }
 }
-*/
 ```
 
 ## ⭐ Support for
