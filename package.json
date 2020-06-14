@@ -1,6 +1,6 @@
 {
    "name": "merge-all-objects",
-   "version": "1.0.3",
+   "version": "1.0.4",
    "description": "🚀 merge-all-objects is a function that allows you to merge thousands of objects with recursion, and with exclusions as well",
    "keywords": [
       "merge-all-objects",
