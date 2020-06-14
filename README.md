@@ -39,8 +39,11 @@ const obj1 = {
    circle: {
       one: {},
    },
-   '@delete/bucle': {
-      one: { one: {} },
+   '@remove/bucle': {
+      one: { one: 'First' },
+   },
+   '@exclude/bucle': {
+      one: { one: 'First' },
    },
 };
 
@@ -52,8 +55,11 @@ const obj2 = {
    circle: {
       two: {},
    },
-   '@delete/bucle': {
-      two: { two: {} },
+   '@remove/bucle': {
+      two: { two: 'Second' },
+   },
+   '@exclude/bucle': {
+      two: { two: 'Second' },
    },
 };
 
@@ -70,28 +76,57 @@ const data = Merge(obj1, obj2); // accept unlimited items!
          "two": {}
       },
       "@delete/bucle": {
-         "one": { "one": {} },
-         "two": { "two": {} }
+         "one": { "one": "First" },
+         "two": { "two": "First" }
+      },
+      "@exclude/bucle": {
+         "one": { "one": "Second" },
+         "two": { "two": "Second" }
       }
    }
 }
 ```
 
-### Excluded
+### Removed (keys, values)
 
-`merge-all-objects` allows you to exclude some keys from an object, as follows
+The option to delete objects by their keys or values is also available, as follows
 
--  for example we are going to exclude the circle key assuming that circle contains an infinite loop of objects, to avoid a collapse problem, we will avoid it adding an array of strings the keys we want to exclude, **the keys have to be added always as last parameter of the Merge function**
+```ts
+Merge(obj1, obj2, {
+   // Delete by key
+   removedKeys: ['@circle', /^\@delete/],
+   // Delete by values
+   removedValues: [/^Second/, 8080],
+});
+```
 
--  the key to be excluded will not be iterated, it will simply be assigned the last key among all the objects entered
--  to exclude allows you to add all types of data
--  regular expressions in particular, the test method is executed to validate whether
+```json
+{
+   "app": {
+      "name": "Application",
+      "circle": {
+         "one": {},
+         "two": {}
+      },
+      "@exclude/bucle": {
+         "one": {},
+         "two": {}
+      }
+   }
+}
+```
 
-> I don't know if you notice it, but this object no longer works because it has been excluded, and only the last analyzed value will be assigned to it
+### Excluded (keys, values)
+
+-  The `merge-all-objects` allows to exclude some object keys for recursion !
+-  You will be assigned the last value found that matches your key !
 
 ```ts
 // To add the keys to be excluded always add them at the end in the
-Merge(obj1, obj2, ['circle', /^\@delete/]); // accept unlimited items!
+Merge(obj1, obj2, {
+   // Exclude for keys
+   excludedKeys: ['circle', /^\@exclude/],
+});
 ```
 
 ```json
@@ -103,7 +138,11 @@ Merge(obj1, obj2, ['circle', /^\@delete/]); // accept unlimited items!
          "two": {}
       },
       "@delete/bucle": {
-         "two": { "two": {} }
+         "one": { "one": "First" },
+         "two": { "two": "First" }
+      },
+      "@exclude/bucle": {
+         "two": { "two": "Second" }
       }
    }
 }
