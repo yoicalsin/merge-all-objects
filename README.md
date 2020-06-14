@@ -87,6 +87,26 @@ const data = Merge(obj1, obj2); // accept unlimited items!
 }
 ```
 
+#### 🎁 Options
+
+the options will always be added at the end of the one between the parameters
+
+```ts
+Merge(
+   obj1,
+   obj2,
+   obj3,
+   obj4,
+   obj5,
+   /* always in the end the options */ {
+      removedKeys: [],
+      removedValues: [],
+      excludedKeys: [],
+      excludedValues: [],
+   },
+);
+```
+
 ### Removed (keys, values)
 
 The option to delete objects by their keys or values is also available, as follows
