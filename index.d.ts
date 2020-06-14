@@ -1,6 +1,6 @@
 interface Options {
-    removeKeys?: any[];
-    removeValues?: any[];
+    removedKeys?: any[];
+    removedValues?: any[];
     excludedKeys?: any[];
     excludedValues?: any[];
     [key: string]: any;

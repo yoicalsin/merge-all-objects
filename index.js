@@ -5,12 +5,12 @@ const is_all_utils_1 = require("is-all-utils");
 const Merge = (...objs) => {
     let payload = {}, source, key;
     let lastObj = objs[objs.length - 1];
-    let { removeKeys = (lastObj === null || lastObj === void 0 ? void 0 : lastObj.removeKeys) || [], removeValues = (lastObj === null || lastObj === void 0 ? void 0 : lastObj.removeValues) || [], excludedKeys = (lastObj === null || lastObj === void 0 ? void 0 : lastObj.excludedKeys) || [], excludedValues = (lastObj === null || lastObj === void 0 ? void 0 : lastObj.excludedValues) || [], } = lastObj || {};
+    let { removedKeys = (lastObj === null || lastObj === void 0 ? void 0 : lastObj.removedKeys) || [], removedValues = (lastObj === null || lastObj === void 0 ? void 0 : lastObj.removedValues) || [], excludedKeys = (lastObj === null || lastObj === void 0 ? void 0 : lastObj.excludedKeys) || [], excludedValues = (lastObj === null || lastObj === void 0 ? void 0 : lastObj.excludedValues) || [], } = lastObj || {};
     if (is_all_utils_1.isArray(lastObj)) {
         excludedKeys = lastObj;
     }
     else {
-        if ((lastObj === null || lastObj === void 0 ? void 0 : lastObj.removeKeys) || (lastObj === null || lastObj === void 0 ? void 0 : lastObj.removeValues) || (lastObj === null || lastObj === void 0 ? void 0 : lastObj.excludedKeys) || (lastObj === null || lastObj === void 0 ? void 0 : lastObj.excludedValues)) {
+        if ((lastObj === null || lastObj === void 0 ? void 0 : lastObj.removedKeys) || (lastObj === null || lastObj === void 0 ? void 0 : lastObj.removedValues) || (lastObj === null || lastObj === void 0 ? void 0 : lastObj.excludedKeys) || (lastObj === null || lastObj === void 0 ? void 0 : lastObj.excludedValues)) {
             delete objs[objs.length - 1];
         }
     }
@@ -31,7 +31,7 @@ const Merge = (...objs) => {
                         }
                         return false;
                     };
-                    if (is(removeValues, value) || is(removeKeys, key)) {
+                    if (is(removedValues, value) || is(removedKeys, key)) {
                     }
                     else if (is(excludedValues, value) || is(excludedKeys, key)) {
                         payload[key] = value;
@@ -39,8 +39,8 @@ const Merge = (...objs) => {
                     else {
                         if (is_all_utils_1.isObject(value)) {
                             payload[key] = Merge(payload[key], value, {
-                                removeKeys,
-                                removeValues,
+                                removedKeys,
+                                removedValues,
                                 excludedKeys,
                                 excludedValues,
                             });
