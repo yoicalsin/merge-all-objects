@@ -10,25 +10,7 @@ interface Options {
 
 /**
  * @author Yoni Calsin <helloyonicb@gmail.com>
- * @param {object} obj
- * @example
- * const obj1 = {
- *    app: {
- *       name: "Application"
- *    },
- *    circle: {
- *       one: {}
- *    }
- * }
- * const obj2 = {
- *    app: {
- *       port: 8080
- *    },
- *    circle: {
- *       two: {}
- *    }
- * }
- * Merge(obj1, obj2, ["circle", /^\@delete/])
+ * @documentation https://github.com/yonicalsin/merge-all-objects
  */
 const Merge = <T extends Options = Options>(...objs: (T | Options)[]): T => {
    let payload: Options = {},
