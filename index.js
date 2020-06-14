@@ -8,6 +8,7 @@ const Merge = (...objs) => {
     let { removedKeys = (lastObj === null || lastObj === void 0 ? void 0 : lastObj.removedKeys) || [], removedValues = (lastObj === null || lastObj === void 0 ? void 0 : lastObj.removedValues) || [], excludedKeys = (lastObj === null || lastObj === void 0 ? void 0 : lastObj.excludedKeys) || [], excludedValues = (lastObj === null || lastObj === void 0 ? void 0 : lastObj.excludedValues) || [], } = lastObj || {};
     if (is_all_utils_1.isArray(lastObj)) {
         excludedKeys = lastObj;
+        delete objs[objs.length - 1];
     }
     else {
         if ((lastObj === null || lastObj === void 0 ? void 0 : lastObj.removedKeys) || (lastObj === null || lastObj === void 0 ? void 0 : lastObj.removedValues) || (lastObj === null || lastObj === void 0 ? void 0 : lastObj.excludedKeys) || (lastObj === null || lastObj === void 0 ? void 0 : lastObj.excludedValues)) {
