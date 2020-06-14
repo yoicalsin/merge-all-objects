@@ -1,38 +1,46 @@
 import { isObject, isArray, isRegExp, isString } from 'is-all-utils';
 
-interface More {
+interface Options {
+   removedKeys?: any[];
+   removedValues?: any[];
+   excludedKeys?: any[];
+   excludedValues?: any[];
    [key: string]: any;
 }
 
 /**
  * @author Yoni Calsin <helloyonicb@gmail.com>
- * @param {object} obj
- * @example
- * const obj1 = {
- *    app: {
- *       name: "Application"
- *    },
- *    circle: {
- *       one: {}
- *    }
- * }
- * const obj2 = {
- *    app: {
- *       port: 8080
- *    },
- *    circle: {
- *       two: {}
- *    }
- * }
- * Merge(obj1, obj2, ["circle", /^\@delete/])
+ * @documentation https://github.com/yonicalsin/merge-all-objects
  */
-const Merge = <T extends More = More>(...objs: (T | More)[]): T => {
-   let payload: More = {},
-      source: More,
+const Merge = <T extends Options = Options>(...objs: (T | Options)[]): T => {
+   let payload: Options = {},
+      source: Options,
       key: string | number;
-   let excluded: any[] = objs[objs.length - 1] as any;
+   let lastObj: any = objs[objs.length - 1] as any;
+
    // For add the excluded keys
-   excluded = isArray(excluded) ? excluded : [];
+   let {
+      // For remove
+      removedKeys = lastObj?.removedKeys || [],
+      removedValues = lastObj?.removedValues || [],
+      // For excluded
+      excludedKeys = lastObj?.excludedKeys || [],
+      excludedValues = lastObj?.excludedValues || [],
+   } = lastObj || {};
+
+   if (isArray(lastObj)) {
+      excludedKeys = lastObj;
+      delete objs[objs.length - 1];
+   } else {
+      if (
+         lastObj?.removedKeys ||
+         lastObj?.removedValues ||
+         lastObj?.excludedKeys ||
+         lastObj?.excludedValues
+      ) {
+         delete objs[objs.length - 1];
+      }
+   }
 
    while (objs.length > 0) {
       source = objs.splice(0, 1)[0];
@@ -40,18 +48,35 @@ const Merge = <T extends More = More>(...objs: (T | More)[]): T => {
          for (key in source) {
             if (source.hasOwnProperty(key)) {
                const value = source[key];
-               if (
-                  isObject(value) &&
-                  !excluded.some(exclude => {
-                     if (isRegExp(exclude) && isString(key)) {
-                        return (exclude as RegExp).test(key as string);
-                     }
-                     return key === exclude;
-                  })
-               ) {
-                  payload[key] = Merge(payload[key] || {}, value, excluded);
-               } else {
+
+               // Array.includes validation function including custom regular expressions
+               const is = (arr: any[], index) => {
+                  if (arr.length > 0) {
+                     return arr.some(exclude => {
+                        if (isRegExp(exclude) && isString(index)) {
+                           return (exclude as RegExp).test(index as string);
+                        }
+                        return index === exclude;
+                     });
+                  }
+                  return false;
+               };
+
+               if (is(removedValues, value) || is(removedKeys, key)) {
+                  // empty
+               } else if (is(excludedValues, value) || is(excludedKeys, key)) {
                   payload[key] = value;
+               } else {
+                  if (isObject(value)) {
+                     payload[key] = Merge(payload[key], value, {
+                        removedKeys,
+                        removedValues,
+                        excludedKeys,
+                        excludedValues,
+                     });
+                  } else {
+                     payload[key] = value;
+                  }
                }
             }
          }
