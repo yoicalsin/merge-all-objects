@@ -30,6 +30,7 @@ const Merge = <T extends Options = Options>(...objs: (T | Options)[]): T => {
 
    if (isArray(lastObj)) {
       excludedKeys = lastObj;
+      delete objs[objs.length - 1];
    } else {
       if (
          lastObj?.removedKeys ||
