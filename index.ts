@@ -1,8 +1,8 @@
 import { isObject, isArray, isRegExp, isString } from 'is-all-utils';
 
 interface Options {
-   removeKeys?: any[];
-   removeValues?: any[];
+   removedKeys?: any[];
+   removedValues?: any[];
    excludedKeys?: any[];
    excludedValues?: any[];
    [key: string]: any;
@@ -39,8 +39,8 @@ const Merge = <T extends Options = Options>(...objs: (T | Options)[]): T => {
    // For add the excluded keys
    let {
       // For remove
-      removeKeys = lastObj?.removeKeys || [],
-      removeValues = lastObj?.removeValues || [],
+      removedKeys = lastObj?.removedKeys || [],
+      removedValues = lastObj?.removedValues || [],
       // For excluded
       excludedKeys = lastObj?.excludedKeys || [],
       excludedValues = lastObj?.excludedValues || [],
@@ -50,8 +50,8 @@ const Merge = <T extends Options = Options>(...objs: (T | Options)[]): T => {
       excludedKeys = lastObj;
    } else {
       if (
-         lastObj?.removeKeys ||
-         lastObj?.removeValues ||
+         lastObj?.removedKeys ||
+         lastObj?.removedValues ||
          lastObj?.excludedKeys ||
          lastObj?.excludedValues
       ) {
@@ -79,15 +79,15 @@ const Merge = <T extends Options = Options>(...objs: (T | Options)[]): T => {
                   return false;
                };
 
-               if (is(removeValues, value) || is(removeKeys, key)) {
+               if (is(removedValues, value) || is(removedKeys, key)) {
                   // empty
                } else if (is(excludedValues, value) || is(excludedKeys, key)) {
                   payload[key] = value;
                } else {
                   if (isObject(value)) {
                      payload[key] = Merge(payload[key], value, {
-                        removeKeys,
-                        removeValues,
+                        removedKeys,
+                        removedValues,
                         excludedKeys,
                         excludedValues,
                      });
